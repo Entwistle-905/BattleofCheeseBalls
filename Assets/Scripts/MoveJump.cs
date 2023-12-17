@@ -8,9 +8,10 @@ public class MoveJump : MonoBehaviour
     float horizontal;
     public float speed = 10;
     public float jumpingPower = 10;
-    private bool isFacingRight = true;
+    //private bool isFacingRight = true;
     public Rigidbody2D rigid;
     public SpriteRenderer spriteRenderer;
+    public Collider2D[] Floor;
 
     // Start is called before the first frame update
     void Start()
@@ -24,16 +25,11 @@ public class MoveJump : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        /*        if (Input.GetButtonDown("Jump"))
-                {
-                    rigid.velocity = new Vector2(rigid.velocity.x, jumpingPower);
-                }*/
-
         Debug.Log(rigid.velocity.y);
-        if (Input.GetButtonDown("Jump") && (rigid.velocity.y <= 0f && rigid.velocity.y > -0.1f))
+
+        if (Input.GetAxisRaw("Vertical") > 0.0f && IsTouchingGorund())
         {
             rigid.velocity = new Vector2(rigid.velocity.x, jumpingPower);
-            
         }
         Flip();
     }
@@ -54,14 +50,17 @@ public class MoveJump : MonoBehaviour
         {
             spriteRenderer.flipX = true;
         }
+    }
 
-
-/*        if (isFacingRight)
-        {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }*/
+    private bool IsTouchingGorund()
+    {
+        foreach(Collider2D Current in Floor)
+        { 
+            if (rigid.IsTouching(Current))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
