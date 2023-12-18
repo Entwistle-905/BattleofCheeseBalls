@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Health : NetworkBehaviour
 {
-    float health = 100.0f;
+    NetworkVariable<float> health = new NetworkVariable<float>(100.0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private Animator anim;
 
     private void Start()
@@ -13,16 +13,28 @@ public class Health : NetworkBehaviour
         anim = GetComponent<Animator>();
     }
 
+    [ServerRpc(RequireOwnership =false)]
+    public void TakeDamageServerRpc(float damage, ServerRpcParams RpcParams)
+    {
+        Debug.Log(RpcParams.Receive.SenderClientId);
+        //Debug.Log();
+        NetworkObject Obj = NetworkManager.Singleton.ConnectedClients[RpcParams.Receive.SenderClientId].PlayerObject;
+        if (Obj.GetComponent<Health>())
+        {
+            Obj.GetComponent<Health>().TakeDamage(damage);
+        }
+    }
+
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        Debug.Log(health);
+        health.Value -= damage;
+        Debug.Log(health.Value);
         CheckDead();
     }
 
     private void CheckDead()
     {
-        if (health == 0 || health < 0)
+        if (health.Value == 0 || health.Value < 0)
         {
             Die();
         }
