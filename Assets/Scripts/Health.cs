@@ -5,7 +5,13 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     float health = 100.0f;
-    
+    private Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     public void TakeDamage(float damage)
     {
         health -= damage;
@@ -15,7 +21,7 @@ public class Health : MonoBehaviour
 
     private void CheckDead()
     {
-        if (health < 0)
+        if (health == 0 || health < 0)
         {
             Die();
         }
@@ -23,7 +29,9 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-
+        int death = Random.Range(0, 10);
+        anim.SetInteger("DeadVer", death);
+        anim.SetBool("IsDead", true);
     }
 
 }
