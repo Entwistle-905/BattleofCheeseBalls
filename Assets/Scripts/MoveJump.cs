@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
+using Unity.Netcode;
 using UnityEngine;
 
-public class MoveJump : MonoBehaviour
+public class MoveJump : NetworkBehaviour
 {
     float horizontal;
     public float speed = 10;
@@ -11,18 +12,27 @@ public class MoveJump : MonoBehaviour
     //private bool isFacingRight = true;
     public Rigidbody2D rigid;
     public SpriteRenderer spriteRenderer;
-    public Collider2D[] Floor;
+    Collider2D[] Floor;
 
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        GameObject[] Objects = GameObject.FindGameObjectsWithTag("Floor");
+        Floor = new Collider2D[Objects.Length];
+
+        for(int i = 0; i < Objects.Length; i++)
+        {
+            Floor[i] = Objects[i].GetComponent<Collider2D>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         horizontal = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetAxisRaw("Vertical") > 0.0f && IsTouchingGround())

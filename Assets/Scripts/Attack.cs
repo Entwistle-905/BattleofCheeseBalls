@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Attack : MonoBehaviour
+public class Attack : NetworkBehaviour
 {
     Animator anim;
     float width;
@@ -16,6 +17,7 @@ public class Attack : MonoBehaviour
 
     void Update()
     {
+        if (!IsOwner) return;
         Punch();
     }
 
