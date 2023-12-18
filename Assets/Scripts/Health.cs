@@ -45,6 +45,7 @@ public class Health : NetworkBehaviour
         int death = Random.Range(0, 10);
         anim.SetInteger("DeadVer", death);
         anim.SetBool("IsDead", true);
+        SFXManager.Instance.PlayDeadSFX();
     }
 
 }

@@ -27,6 +27,7 @@ public class Attack : NetworkBehaviour
         {
             // move animation
             anim.SetBool("IsPunch", true);
+            SFXManager.Instance.PlayPunchSFX();
             RaycastHit2D HitInfo;
 
             if (HitInfo = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y), Vector2.right, rayCastLengthCheck))
@@ -35,8 +36,9 @@ public class Attack : NetworkBehaviour
                 Health OtherHealth = HitInfo.collider.gameObject.GetComponent<Health>();
                 if (OtherHealth != null) 
                 {
-                    Debug.Log("try to damage");
+
                     OtherHealth.TakeDamageServerRpc(Damage, new ServerRpcParams());
+                    SFXManager.Instance.PlayPunchSFX();
                 }
             }
         }

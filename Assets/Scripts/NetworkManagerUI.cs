@@ -21,6 +21,7 @@ public class NetworkManagerUI : MonoBehaviour
             BG2.gameObject.SetActive(true);
             RedInfo.gameObject.SetActive(true);
             BlueInfo.gameObject.SetActive(true);
+            AudioManager.Instance.PlayBattleMusic();
         });
 
         ClientButton.onClick.AddListener(() =>
@@ -30,6 +31,7 @@ public class NetworkManagerUI : MonoBehaviour
             BG2.gameObject.SetActive(true);
             RedInfo.gameObject.SetActive(true);
             BlueInfo.gameObject.SetActive(true);
+            AudioManager.Instance.PlayBattleMusic();
         });
     }
 }
