@@ -31,10 +31,12 @@ public class Attack : NetworkBehaviour
 
             if (HitInfo = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y), Vector2.right, rayCastLengthCheck))
             {
+                Debug.Log("hit");
                 Health OtherHealth = HitInfo.collider.gameObject.GetComponent<Health>();
                 if (OtherHealth != null) 
                 {
-                    OtherHealth.TakeDamage(Damage);
+                    Debug.Log("try to damage");
+                    OtherHealth.TakeDamageServerRpc(Damage, new ServerRpcParams());
                 }
             }
         }
