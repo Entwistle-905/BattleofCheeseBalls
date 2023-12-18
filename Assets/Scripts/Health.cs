@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        //GetComponent<Animator>().SetBool();
+
     }
 
 }
