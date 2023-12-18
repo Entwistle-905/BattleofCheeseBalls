@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9dbb1d1064b134b4bb9c7c1b5af08713
+guid: 50a59775b59649c4c9c9e9d64d5d27d1
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -10,7 +10,8 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - November
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 9dbb1d1064b134b4bb9c7c1b5af08713, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
