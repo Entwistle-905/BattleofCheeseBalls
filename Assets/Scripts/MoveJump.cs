@@ -13,14 +13,11 @@ public class MoveJump : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Collider2D[] Floor;
 
-    Animator anim;
-
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -28,14 +25,11 @@ public class MoveJump : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        Debug.Log(rigid.velocity.y);
-
         if (Input.GetAxisRaw("Vertical") > 0.0f && IsTouchingGround())
         {
             rigid.velocity = new Vector2(rigid.velocity.x, jumpingPower);
         }
         Flip();
-        Punch();
     }
 
     private void FixedUpdate()
@@ -66,21 +60,5 @@ public class MoveJump : MonoBehaviour
             }
         }
         return false;
-    }
-
-    private void Punch()
-    {
-        if (Input.GetButtonDown("Punch"))
-        {
-            // move animation
-            anim.SetBool("IsPunch", true);
-
-            // raycast hits other player
-                // deal damages
-        }
-        else
-        {
-            anim.SetBool("IsPunch", false);
-        }
     }
 }
