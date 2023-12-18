@@ -69,6 +69,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: DeadVer
     m_EventTreshold: 5
+  - m_ConditionMode: 6
+    m_ConditionEvent: DeadVer
+    m_EventTreshold: 5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6331626922822165491}
   m_Solo: 0
@@ -327,6 +330,9 @@ AnimatorStateTransition:
     m_ConditionEvent: IsDead
     m_EventTreshold: 0
   - m_ConditionMode: 3
+    m_ConditionEvent: DeadVer
+    m_EventTreshold: 5
+  - m_ConditionMode: 6
     m_ConditionEvent: DeadVer
     m_EventTreshold: 5
   m_DstStateMachine: {fileID: 0}
