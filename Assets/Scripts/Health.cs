@@ -29,7 +29,6 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        //GetComponent<Animator>().SetBool();
         int death = Random.Range(0, 10);
         anim.SetInteger("DeadVer", death);
         anim.SetBool("IsDead", true);
