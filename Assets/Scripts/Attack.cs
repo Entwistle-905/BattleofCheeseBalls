@@ -27,7 +27,6 @@ public class Attack : NetworkBehaviour
         {
             // move animation
             anim.SetBool("IsPunch", true);
-            SFXManager.Instance.PlayPunchSFX();
             RaycastHit2D HitInfo;
 
             if (HitInfo = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y), Vector2.right, rayCastLengthCheck))

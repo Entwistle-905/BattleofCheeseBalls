@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2372137917
+  GlobalObjectIdHash: 2385713338
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -149,6 +149,9 @@ MonoBehaviour:
   jumpingPower: 10
   rigid: {fileID: 6013513760830171117}
   spriteRenderer: {fileID: 0}
+  controllers:
+  - {fileID: 9100000, guid: 2a2c8b81c1193324fbac4a8580c91715, type: 2}
+  - {fileID: 9100000, guid: 86c9d531da3c9a645b120e42874eafb0, type: 2}
 --- !u!50 &6013513760830171117
 Rigidbody2D:
   serializedVersion: 4

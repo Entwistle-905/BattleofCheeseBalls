@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using Unity.Netcode;
+//using UnityEditor.Animations;
 using UnityEngine;
 
 public class MoveJump : NetworkBehaviour
@@ -13,25 +14,47 @@ public class MoveJump : NetworkBehaviour
     public Rigidbody2D rigid;
     public SpriteRenderer spriteRenderer;
     Collider2D[] Floor;
+    Animator animator;
+    public RuntimeAnimatorController[] controllers;
 
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
         GameObject[] Objects = GameObject.FindGameObjectsWithTag("Floor");
         Floor = new Collider2D[Objects.Length];
 
-        for(int i = 0; i < Objects.Length; i++)
+        for (int i = 0; i < Objects.Length; i++)
         {
             Floor[i] = Objects[i].GetComponent<Collider2D>();
         }
+
+        
+/*        if (NetworkManagerUI.IsServer == false)
+        {
+            animator.runtimeAnimatorController = controllers[1];
+        }
+        else if (NetworkManagerUI.IsServer == true)
+        {
+            animator.runtimeAnimatorController = controllers[0];
+        }*/
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (NetworkManagerUI.IsServer)
+        {
+            NetworkManager.Singleton.ConnectedClients[0].PlayerObject.GetComponent<Animator>().runtimeAnimatorController = controllers[0];
+            if (NetworkManagerUI.IsClientExist == true)
+            {
+                NetworkManager.Singleton.ConnectedClients[1].PlayerObject.GetComponent<Animator>().runtimeAnimatorController = controllers[1];
+            }
+        }
+
         if (!IsOwner) return;
         horizontal = Input.GetAxisRaw("Horizontal");
 
@@ -52,11 +75,13 @@ public class MoveJump : NetworkBehaviour
     {
         if (horizontal > 0f)
         {
-            spriteRenderer.flipX = false;   
+            //spriteRenderer.flipX = false;   
+            this.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f) ;
         }
         else if (horizontal < 0f)
         {
-            spriteRenderer.flipX = true;
+            //spriteRenderer.flipX = true;
+            this.transform.localScale = new Vector3(-1.1f, 1.1f, 1.1f);
         }
     }
 
